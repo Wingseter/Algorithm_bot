@@ -15,6 +15,7 @@ def post_message(token, channel, text):
 # slack 토큰
 myToken = token_key 
 
+
 def pick_problem(platform, level):
     if platform == "backjoon":
         prob_df = pd.read_csv("data/backjoon.csv")
@@ -63,40 +64,34 @@ def make_message(year, month, day, platform, level, prob_num, title, url):
                      }
     if platform == "backjoon":
         hardness = level_dict[level]
+        title = title[2:-2]
     else:
         hardness = str(level)
 
-    base_line = "❤️ " + year + "." + month + "." + day + "1일 1 문제\n" +\
-            "*" + title + "*" +\
+    base_line = "❤️ " + year + "." + month + "." + day + "   1일 1 문제\n" +\
+            "*" + title + "*\n" +\
             "오늘의 문제 난의도: " + hardness + "\n" + \
             "URL: " + url + "\n" + \
             "문제 풀이가 막히거나 문제를 풀었다면 해당 스레드에\n 링크, 코드, 질문 등을 올려줘!\n" +\
-            "+이번 문제에 대해 \"반응\"을 통해서 의견을 남겨줘✅" +\
-            '😁 난이도 + 1' +\
-            "😑: 현 상황 유지" +\
-            "🥵:뜨거워하는_얼굴:: 난이도 - 1"
-    base_line = "test"
-
+            "+이번 문제에 대해 \"반응\"을 통해서 의견을 남겨줘✅\n" +\
+            '😁: 난이도 + 1\n' +\
+            "😑: 현 상황 유지\n" +\
+            "🥵: 난이도 - 1"
     return base_line
-
-def dbgout(message):
-    print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message)
-    strbuf = datetime.now().strftime('[%m/%d %H:%M:%S] ') + message
-    post_message(myToken, "#algorithem", strbuf)
 
 if __name__ == "__main__":
     day = (datetime.now() + timedelta(hours=9)).strftime("%y %m %d") 
     year, month, day = day.split()
-
     if int(day) % 2 == 0:
         platform = "backjoon"
         level = backjoon_level
     else:
         platform = "samsung"
         level = solved_level
+
     
     level, prob_num, title, url = pick_problem(platform, level)
 
     final_message = make_message(year= year, month = month, day = day, platform=platform, level=level, prob_num=prob_num, title=title, url = url)
 
-    post_message("token", "#algorithem", final_message)
+    post_message(myToken, "#알고리즘_channel", final_message)
