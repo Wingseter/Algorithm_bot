@@ -29,7 +29,8 @@ for level in range(1, 9):
             prob_nums.append(nums.contents)
         prob_titles = []
         for title in soup.select('div.widget-list > div.widget-box-sub > div > div > span.week_text > a'):
-            real_title = title.contents[0].get_text().strip('\r\n\t\xa0')
+            real_title = str(title.contents[0].string)
+            real_title = real_title.strip('\r\n\t\xa0')
             prob_titles.append(real_title)
         prob_urls = []
         for url in soup.select('div.widget-list > div.widget-box-sub > div > div > span.week_text > a'):

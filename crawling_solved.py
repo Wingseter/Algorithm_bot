@@ -9,7 +9,7 @@ result = pd.DataFrame()
 # 1: Bronze5, 30: Ruby1
 print("Crawling Solved.ac Start")
 print("==============================================")
-for level in range(16, 31):
+for level in range(1, 31):
     print("Level" + str(level))
     print("==============================================")
     page = 0
