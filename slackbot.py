@@ -3,7 +3,8 @@ from datetime import datetime
 from datetime import timedelta
 import pandas as pd
 import re
-from secure import token_key, backjoon_level, solved_level
+import os
+from secure import backjoon_level, solved_level
 
 # slack 챗 봇
 def post_message(token, channel, text):
@@ -12,8 +13,8 @@ def post_message(token, channel, text):
                              data={"channel": channel, "text": text})
     print(response)
 
-# slack 토큰
-myToken = token_key 
+# slack 토큰 Lair의 .secure 파일에서 설정할것
+myToken = os.getenv('algKey')
 
 
 def pick_problem(platform, level):
