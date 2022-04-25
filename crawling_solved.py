@@ -28,16 +28,16 @@ for level in range(1, 31):
         for nums in soup.select('a.ProblemInline__ProblemStyle-sc-yu6g1r-0.jRAQI > span'):
             prob_nums.append(nums.contents)
         prob_titles = []
-        for title in soup.select('div.ProblemTitleTag__ProblemTitle-sc-iphdox-1.kihrnS > a > span'):
+        for title in soup.select('div.ProblemTitleLink__ProblemTitle-sc-2ljb1q-1.gBCZWH > a > span'):
             prob_titles.append(title.contents)
         prob_urls = []
-        for url in soup.select('div.ProblemTitleTag__ProblemTitle-sc-iphdox-1.kihrnS > a'):
+        for url in soup.select('div.ProblemTitleLink__ProblemTitle-sc-2ljb1q-1.gBCZWH > a'):
             prob_urls.append(url['href'])
 
         if len(prob_nums) != len(prob_titles) and len(prob_titles) != len(prob_urls):
             print("I Think It have something Problems")
 
-        if len(prob_nums) != 0 and len(title) != 0:
+        if len(prob_nums) != 0:
             for i in range(len(prob_nums)):
                 df1 = pd.DataFrame({'level':[level],\
                     'prob_num':[prob_nums[i]],\
